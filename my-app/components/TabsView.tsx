@@ -7,7 +7,7 @@ const TabsView = () => {
             <Image src="/helpIcon.svg" alt="help Icon" height={24} width={24}/>
             <Image src="/gridIcon.svg" alt="6 boxes icon" height={30.69} width={20}/>
         </div>
-        <Tabs defaultValue="about" className="flex-1 max-w-[606px]">
+        <Tabs defaultValue="about" className="flex-1 max-w-[605px]">
             <TabsList>
                 <TabsTrigger value="about">About Me</TabsTrigger>
                 <TabsTrigger value="experiences">Experiences</TabsTrigger>
