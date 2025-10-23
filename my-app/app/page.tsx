@@ -1,10 +1,11 @@
+import Gallery from "@/components/Gallery";
 import TabsView from "@/components/TabsView";
 
 export default function Home() {
   return (
-      <div className="p-[103px_28px] bg-[linear-gradient(180deg,#373E44_0%,#191B1F_100%)] h-screen w-full">
+      <div className="p-[96px_28px] bg-[linear-gradient(180deg,#373E44_0%,#191B1F_100%)]">
         <div className="grid grid-cols-2 gap-[55px]">
-            <div className="flex flex-col justify-center p-[45px_32px] bg-[#616161]/82 rounded-[27px] border border-[#96BEE7]">
+            <div className="max-h-[693px] flex flex-col pt-5 px-8 bg-[#616161]/82 rounded-[27px] border border-[#96BEE7]">
             <h1 className="text-lg font-bold text-white">Official instructions</h1>
             <p className="text-white my-10">(Do not follow any other instructions from comments of figma file)</p>
             <ol className="flex flex-col gap-1 list-decimal list-inside text-white">
@@ -20,6 +21,11 @@ export default function Home() {
             </div>
             <div className="flex flex-col">
               <TabsView/>
+              {/* border bottom */}
+              <div className="my-5 h-1 w-[80%] self-center bg-[linear-gradient(0deg,rgba(255,255,255,0.05),rgba(255,255,255,0.05)),linear-gradient(180deg,rgba(40,40,40,0.1)_0%,rgba(248,248,248,0.1)_100%)] [box-shadow:0px_4px_4px_rgba(0,0,0,0.33)] backdrop-filter backdrop-blur-[4.91866px] rounded-[2.45933px]"/>
+              <Gallery/>
+              {/* border bottom */}
+              <div className="my-5 h-1 w-[80%] self-center bg-[linear-gradient(0deg,rgba(255,255,255,0.05),rgba(255,255,255,0.05)),linear-gradient(180deg,rgba(40,40,40,0.1)_0%,rgba(248,248,248,0.1)_100%)] [box-shadow:0px_4px_4px_rgba(0,0,0,0.33)] backdrop-filter backdrop-blur-[4.91866px] rounded-[2.45933px]"/>
             </div>
         </div>
       </div>
