@@ -116,6 +116,7 @@ import Image from "next/image"
 import { Button } from "./ui/button"
 import { useState, useRef, ChangeEvent  } from "react"
 import { toast } from "sonner"
+import {motion} from "motion/react"
 interface ImageType {
   src: string
   alt: string
@@ -215,7 +216,7 @@ const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
             
             {/* Navigation Arrows */}
             <div className="flex gap-[18px]">
-							<Button 
+							{/* <Button 
 								onClick={handlePrev}
 								disabled={!canGoPrev}
 								className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C]! active:text-white!"
@@ -227,7 +228,24 @@ const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 									width={12}
 									className="transition-colors text-[#6F787C]! group-active:text-white!"
 								/>
-							</Button>
+							</Button> */}
+              <Button 
+                onClick={handlePrev}
+                disabled={!canGoPrev}
+                className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
+              >
+                <svg 
+                  width="12" 
+                  height="12" 
+                  viewBox="0 0 17 16" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="transition-colors"
+                >
+                  <path d="M1 7.99999H15.1944" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 15L1 8L8 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Button>
               
               {/* <button 
                 onClick={handleNext}
@@ -240,35 +258,89 @@ const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
               <button 
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className="grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] hover:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all"
+                className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
               >
-								<Image src="/rightArrow.svg" alt="right arrow"  height={12} width={12}/>
+								<svg 
+                  width="17" 
+                  height="16" 
+                  viewBox="0 0 17 16" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="transition-colors"
+                >
+                  <path d="M15.1945 8.00001L1.00001 8.00001" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8.19446 1L15.1945 8L8.19446 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
             </div>
           </div>
         </div>
 
         {/* Image Slider */}
-        <div className="relative overflow-hidden max-w-[612px]">
-          <div 
-            className="flex gap-[21px] transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
-          >
-            {images.map((image, index) => (
-              <figure
-                key={index}
-                className="relative h-[179px] w-[190px] shrink-0 overflow-hidden rounded-[24px] hover:scale-105 transition-transform duration-300"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-300"
-                  sizes="190px"
-                />
-              </figure>
-            ))}
+        <div className=" max-w-[612px]">
+<div className="relative w-full"> {/* Add overflow-hidden here */}
+  <div 
+    className="flex gap-[21px] transition-transform duration-500 ease-out"
+    style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
+  >
+    {images.map((image, index) => (
+      <div
+        key={index}
+        className="relative h-[179px] w-[190px] shrink-0"
+        style={{ zIndex: 1 }}
+      >
+        {/* Motion wrapper - scales and rotates the entire card */}
+        <motion.div
+          className="relative h-full w-full rounded-3xl shadow-xl origin-bottom"
+          whileHover={{
+            scaleX: 1.095,
+            scaleY: 1.095,
+            rotateZ: -2,
+            zIndex: 10,
+          }}
+          transition={{
+            type: 'spring',
+            stiffness: 350,
+            damping: 20,
+          }}
+          style={{
+            transformOrigin: 'bottom center',
+          }}
+        >
+          {/* Base grayscale image */}
+          <div className="absolute inset-0 rounded-3xl overflow-hidden">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="220px"
+              className="object-cover"
+              style={{
+                filter: 'grayscale(100%)',
+              }}
+            />
           </div>
+          
+          {/* Color overlay that fades in on hover */}
+          <motion.div
+            className="absolute inset-0 rounded-3xl overflow-hidden"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="220px"
+              className="object-cover"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </div>
     </div>
