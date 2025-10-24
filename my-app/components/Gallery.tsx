@@ -110,6 +110,302 @@
 
 // export default Gallery
 
+// "use client"
+
+// import Image from "next/image"
+// import { Button } from "./ui/button"
+// import { useState, useRef, ChangeEvent  } from "react"
+// import { toast } from "sonner"
+// import {motion} from "motion/react"
+// interface ImageType {
+//   src: string
+//   alt: string
+// }
+
+// const Gallery = () => {
+//   const [images, setImages] = useState<ImageType[]>([
+//     { src: "/gallery1.jpg", alt: "building 1" },
+//     { src: "/gallery2.jpg", alt: "building 2" },
+//     { src: "/gallery3.jpg", alt: "building 3" },
+//     { src: "/gallery4.jpg", alt: "building 4" },
+//     { src: "/gallery5.jpg", alt: "building 5" },
+//     { src: "/gallery6.jpg", alt: "building 6" },
+//   ])
+  
+//   const [currentIndex, setCurrentIndex] = useState(0)
+// 	const fileInputRef = useRef<HTMLInputElement>(null)
+//   const imagesPerView = 3
+
+//   const handleNext = () => {
+//     if (currentIndex + imagesPerView < images.length) {
+//       setCurrentIndex(prev => prev + 1)
+//     }
+//   }
+
+//   const handlePrev = () => {
+//     if (currentIndex > 0) {
+//       setCurrentIndex(prev => prev - 1)
+//     }
+//   }
+
+//  const handleAddImageClick = () => {
+//     fileInputRef.current?.click()
+//   }
+
+// const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0]
+//     if (file && file.type.startsWith('image/')) {
+//       const reader = new FileReader()
+//       reader.onload = (event) => {
+//         if (event.target?.result && typeof event.target.result === 'string') {
+//           const newImage: ImageType = {
+//             src: event.target.result,
+//             alt: `building ${images.length + 1}`
+//           }
+//           setImages([...images, newImage])
+//           toast.success('Image added successfully!')
+//           // Scroll to show the new image
+//           if (currentIndex + imagesPerView >= images.length) {
+//             setCurrentIndex(images.length - imagesPerView + 1)
+//           }
+//         }
+//       }
+//       reader.readAsDataURL(file)
+//     }
+//     // Reset input value to allow selecting the same file again
+//     e.target.value = ''
+//   }
+
+//   const visibleImages = images.slice(currentIndex, currentIndex + imagesPerView)
+//   const canGoPrev = currentIndex > 0
+//   const canGoNext = currentIndex + imagesPerView < images.length
+
+//   return (
+//     <div className="px-3 py-[18px] bg-[#363C43] rounded-[18.89px] flex gap-5 w-full">
+//       <div className="flex flex-col gap-[105px] pt-2">
+//         <Image src="/helpIcon.svg" alt="help Icon" height={24} width={24}/>
+//         <Image src="/gridIcon.svg" alt="6 boxes icon" height={30.69} width={20}/>
+//       </div>
+      
+//       <div className="flex flex-col not-only:flex-1  pr-[61px]">
+//         {/* Header */}
+//         <div className="flex justify-between items-center">
+//           <div className='h-[62px] w-[149px] py-4 px-[39px] bg-black rounded-[20px] text-xl font-medium text-white flex items-center justify-center'>
+//             Gallery
+//           </div>
+          
+//           <div className="flex gap-[34px] items-center">
+// 						{/* hidden file input */}
+// 							<input
+//                 ref={fileInputRef}
+//                 type="file"
+//                 accept="image/*"
+//                 onChange={handleFileChange}
+//                 className="hidden"
+//               />
+//             {/* Add Image Button */}
+//             <Button 
+//               onClick={handleAddImageClick}
+//               className="h-[46px] w-[131px] flex gap-[5px] items-center justify-center text-xs font-semibold text-white bg-[rgba(255,255,255,0.03)] [box-shadow:-0.5px_-0.5px_6.9px_rgba(255,255,255,0.25),9px_10px_7.1px_rgba(0,0,0,0.4),inset_0px_0px_48px_rgba(255,255,255,0.05),inset_0px_3px_3px_rgba(255,255,255,0.15)] backdrop-blur-[52px] rounded-full hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+//             >
+//               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+//                 <path d="M6.5 1V12M1 6.5H12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+//               </svg>
+//               ADD IMAGE
+//             </Button>
+            
+//             {/* Navigation Arrows */}
+//             <div className="flex gap-[18px]">
+// 							{/* <Button 
+// 								onClick={handlePrev}
+// 								disabled={!canGoPrev}
+// 								className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C]! active:text-white!"
+// 							>
+// 								<Image 
+// 									src="/leftArrow.svg" 
+// 									alt="left arrow" 
+// 									height={12} 
+// 									width={12}
+// 									className="transition-colors text-[#6F787C]! group-active:text-white!"
+// 								/>
+// 							</Button> */}
+//               <Button 
+//                 onClick={handlePrev}
+//                 disabled={!canGoPrev}
+//                 className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
+//               >
+//                 <svg 
+//                   width="12" 
+//                   height="12" 
+//                   viewBox="0 0 17 16" 
+//                   fill="none" 
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="transition-colors"
+//                 >
+//                   <path d="M1 7.99999H15.1944" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                   <path d="M8 15L1 8L8 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                 </svg>
+//               </Button>
+              
+//               {/* <button 
+//                 onClick={handleNext}
+//                 disabled={!canGoNext}
+//                 className="grid place-content-center relative h-[45px] w-[45px] rounded-full bg-linear-to-br from-[#303439] via-[#232629] to-[#161718] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.5),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all"
+//               >
+// 								<Image src="/rightArrow.svg" alt="right arrow"  height={12} width={12}/>
+//               </button> */}
+							
+//               <button 
+//                 onClick={handleNext}
+//                 disabled={!canGoNext}
+//                 className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
+//               >
+// 								<svg 
+//                   width="17" 
+//                   height="16" 
+//                   viewBox="0 0 17 16" 
+//                   fill="none" 
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="transition-colors"
+//                 >
+//                   <path d="M15.1945 8.00001L1.00001 8.00001" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                   <path d="M8.19446 1L15.1945 8L8.19446 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                 </svg>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//         {/* Image Slider */}
+//           {/* <div className="relative w-full"> 
+//             <div 
+//               className="flex gap-[21px] transition-transform duration-500 ease-out"
+//               style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
+//             >
+//               {images.map((image, index) => (
+//                 <div
+//                   key={index}
+//                   className="relative h-[179px] w-[190px] shrink-0"
+//                   style={{ zIndex: 1 }}
+//                 >
+//                   <motion.div
+//                     className="relative h-full w-full rounded-3xl shadow-xl origin-bottom"
+//                     whileHover={{
+//                       scaleX: 1.095,
+//                       scaleY: 1.095,
+//                       rotateZ: -2,
+//                       zIndex: 10,
+//                       boxShadow: 'box-shadow: 12px 13px 39.2px 9.15px rgba(10, 10, 10, 0.62), -9.15px -18.5px 54.89px -142px #617892',
+//                     }}
+//                     transition={{
+//                       type: 'spring',
+//                       stiffness: 350,
+//                       damping: 20,
+//                     }}
+//                     style={{
+//                       transformOrigin: 'bottom center',
+//                     }}
+//                   >
+//                     <div className="absolute inset-0 rounded-3xl overflow-hidden">
+//                       <Image
+//                         src={image.src}
+//                         alt={image.alt}
+//                         fill
+//                         sizes="220px"
+//                         className="object-cover"
+//                         style={{
+//                           filter: 'grayscale(100%)',
+//                         }}
+//                       />
+//                     </div>
+//                     <motion.div
+//                       className="absolute inset-0 rounded-3xl overflow-hidden"
+//                       initial={{ opacity: 0 }}
+//                       whileHover={{ opacity: 1 }}
+//                       transition={{ duration: 0.3 }}
+//                     >
+//                       <Image
+//                         src={image.src}
+//                         alt={image.alt}
+//                         fill
+//                         sizes="220px"
+//                         className="object-cover"
+//                       />
+//                     </motion.div>
+//                   </motion.div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div> */}
+//           <div className="relative w-full overflow-hidden pt-[47px] max-w-[628px]"> {/* Added py-4 for vertical space */}
+//             <div 
+//               className="flex gap-[21px] transition-transform duration-500 ease-out px-4" // Added px-4 for horizontal breathing room
+//               style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
+//             >
+//               {images.map((image, index) => (
+//                 <div
+//                   key={index}
+//                   className="relative h-[179px] w-[190px] shrink-0"
+//                 >
+//                   {/* Motion wrapper - scales and rotates from bottom right */}
+//                   <motion.div
+//                     className="relative h-full w-full rounded-3xl shadow-xl"
+//                     whileHover={{
+//                       scaleX: 1.095,
+//                       scaleY: 1.095,
+//                       rotateZ: -2,
+//                       zIndex: 50, // Higher z-index to ensure it's on top
+//                     }}
+//                     transition={{
+//                       type: 'spring',
+//                       stiffness: 350,
+//                       damping: 20,
+//                     }}
+//                     style={{
+//                       transformOrigin: 'bottom left', // Changed from 'bottom center'
+//                     }}
+//                   >
+//                     {/* Base grayscale image */}
+//                     <div className="absolute inset-0 rounded-3xl overflow-hidden">
+//                       <Image
+//                         src={image.src}
+//                         alt={image.alt}
+//                         fill
+//                         sizes="220px"
+//                         className="object-cover"
+//                         style={{
+//                           filter: 'grayscale(100%)',
+//                         }}
+//                       />
+//                     </div>
+                    
+//                     {/* Color overlay that fades in on hover */}
+//                     <motion.div
+//                       className="absolute inset-0 rounded-3xl overflow-hidden"
+//                       initial={{ opacity: 0 }}
+//                       whileHover={{ opacity: 1 }}
+//                       transition={{ duration: 0.3 }}
+//                     >
+//                       <Image
+//                         src={image.src}
+//                         alt={image.alt}
+//                         fill
+//                         sizes="220px"
+//                         className="object-cover"
+//                       />
+//                     </motion.div>
+//                   </motion.div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default Gallery
+
+
 "use client"
 
 import Image from "next/image"
@@ -117,6 +413,7 @@ import { Button } from "./ui/button"
 import { useState, useRef, ChangeEvent  } from "react"
 import { toast } from "sonner"
 import {motion} from "motion/react"
+
 interface ImageType {
   src: string
   alt: string
@@ -133,7 +430,7 @@ const Gallery = () => {
   ])
   
   const [currentIndex, setCurrentIndex] = useState(0)
-	const fileInputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const imagesPerView = 3
 
   const handleNext = () => {
@@ -148,11 +445,11 @@ const Gallery = () => {
     }
   }
 
- const handleAddImageClick = () => {
+  const handleAddImageClick = () => {
     fileInputRef.current?.click()
   }
 
-const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader()
@@ -176,171 +473,138 @@ const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.value = ''
   }
 
-  const visibleImages = images.slice(currentIndex, currentIndex + imagesPerView)
   const canGoPrev = currentIndex > 0
   const canGoNext = currentIndex + imagesPerView < images.length
 
   return (
-    <div className="px-3 py-[18px] bg-[#363C43] rounded-[18.89px] flex gap-5 w-full">
-      <div className="flex flex-col gap-[105px] pt-2">
+    <div className="pl-3 bg-[#363C43] rounded-[18.89px] flex flex-col sm:flex-row gap-6 sm:gap-5 w-full overflow-hidden">
+      {/* <div className="flex flex-col gap-[105px] pt-2">
         <Image src="/helpIcon.svg" alt="help Icon" height={24} width={24}/>
         <Image src="/gridIcon.svg" alt="6 boxes icon" height={30.69} width={20}/>
+      </div> */}
+        {/* Sidebar Icons */}
+      <div className="pt-[18px] flex sm:flex-col items-center sm:items-start justify-between sm:justify-start gap-4 sm:gap-[105px] shrink-0">
+        <Image src="/helpIcon.svg" alt="help Icon" height={24} width={24} />
+        <Image src="/gridIcon.svg" alt="6 boxes icon" height={30.69} width={20} />
       </div>
       
-      <div className="flex flex-col gap-[55px] flex-1">
+      <div className="flex flex-col flex-1 overflow-hidden pr-3 pt-[18px]">
         {/* Header */}
-        <div className="flex justify-between items-center">
-          <div className='h-[62px] w-[149px] py-4 px-[39px] bg-black rounded-[20px] text-xl font-medium text-white flex items-center justify-center'>
+        <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-6">
+          {/* Gallery Title */}
+          <div className="h-[50px] sm:h-[62px] min-w-[120px] sm:min-w-[149px] px-6 sm:px-[39px] bg-black rounded-[20px] text-lg sm:text-xl font-medium text-white flex items-center justify-center text-center sm:text-left">
             Gallery
           </div>
-          
-          <div className="flex gap-[34px] items-center">
-						{/* hidden file input */}
-							<input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+
+          {/* Right Side (Add Image + Arrows) */}
+          <div className="flex flex-wrap justify-end items-center gap-3 sm:gap-5 w-full sm:w-auto">
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+
             {/* Add Image Button */}
-            <Button 
+            <Button
               onClick={handleAddImageClick}
-              className="h-[46px] w-[131px] flex gap-[5px] items-center justify-center text-xs font-semibold text-white bg-[rgba(255,255,255,0.03)] [box-shadow:-0.5px_-0.5px_6.9px_rgba(255,255,255,0.25),9px_10px_7.1px_rgba(0,0,0,0.4),inset_0px_0px_48px_rgba(255,255,255,0.05),inset_0px_3px_3px_rgba(255,255,255,0.15)] backdrop-blur-[52px] rounded-full hover:bg-[rgba(255,255,255,0.08)] transition-colors"
+              className="h-[42px] sm:h-[46px] px-4 sm:px-5 text-xs font-semibold text-white bg-[rgba(255,255,255,0.03)] [box-shadow:-0.5px_-0.5px_6.9px_rgba(255,255,255,0.25),9px_10px_7.1px_rgba(0,0,0,0.4),inset_0px_0px_48px_rgba(255,255,255,0.05),inset_0px_3px_3px_rgba(255,255,255,0.15)] backdrop-blur-[52px] rounded-full hover:bg-[rgba(255,255,255,0.08)] transition-colors flex items-center gap-[5px]"
             >
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M6.5 1V12M1 6.5H12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M6.5 1V12M1 6.5H12" stroke="white" strokeWidth="2" strokeLinecap="round" />
               </svg>
               ADD IMAGE
             </Button>
-            
-            {/* Navigation Arrows */}
-            <div className="flex gap-[18px]">
-							{/* <Button 
-								onClick={handlePrev}
-								disabled={!canGoPrev}
-								className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C]! active:text-white!"
-							>
-								<Image 
-									src="/leftArrow.svg" 
-									alt="left arrow" 
-									height={12} 
-									width={12}
-									className="transition-colors text-[#6F787C]! group-active:text-white!"
-								/>
-							</Button> */}
-              <Button 
+
+            {/* Arrows */}
+            <div className="flex gap-3 sm:gap-[18px]">
+              <Button
                 onClick={handlePrev}
                 disabled={!canGoPrev}
-                className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
+                className="group grid place-content-center h-10 sm:h-[45px] w-10 sm:w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_2px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] transition-all text-[#6F787C] active:text-white"
               >
-                <svg 
-                  width="12" 
-                  height="12" 
-                  viewBox="0 0 17 16" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="transition-colors"
-                >
-                  <path d="M1 7.99999H15.1944" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M8 15L1 8L8 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="12" height="12" viewBox="0 0 17 16" fill="none">
+                  <path d="M1 8H15.1944" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M8 15L1 8L8 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Button>
-              
-              {/* <button 
+
+              <Button
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className="grid place-content-center relative h-[45px] w-[45px] rounded-full bg-linear-to-br from-[#303439] via-[#232629] to-[#161718] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.5),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all"
+                className="group grid place-content-center h-10 sm:h-[45px] w-10 sm:w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] shadow-[inset_-2px_-2px_8px_rgba(150,190,231,0.3),-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_2px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] transition-all text-[#6F787C] active:text-white"
               >
-								<Image src="/rightArrow.svg" alt="right arrow"  height={12} width={12}/>
-              </button> */}
-							
-              <button 
-                onClick={handleNext}
-                disabled={!canGoNext}
-                className="group grid place-content-center relative h-[45px] w-[45px] rounded-full bg-[linear-gradient(139.14deg,#303439_12.4%,#161718_94.96%)] [box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[linear-gradient(139.14deg,#1E252D_12.4%,#161718_94.96%)] active:bg-[linear-gradient(139.14deg,#95BCE9_12.4%,#161718_94.96%)] active:[box-shadow:-5px_-3px_30px_-10px_#96BEE7,4px_5px_30px_5px_#101213] transition-all text-[#6F787C] active:text-white"
-              >
-								<svg 
-                  width="17" 
-                  height="16" 
-                  viewBox="0 0 17 16" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="transition-colors"
-                >
-                  <path d="M15.1945 8.00001L1.00001 8.00001" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M8.19446 1L15.1945 8L8.19446 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none">
+                  <path d="M15.1945 8L1 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M8.19446 1L15.1945 8L8.19446 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
-
         {/* Image Slider */}
-        <div className=" max-w-[612px]">
-<div className="relative w-full"> {/* Add overflow-hidden here */}
-  <div 
-    className="flex gap-[21px] transition-transform duration-500 ease-out"
-    style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
-  >
-    {images.map((image, index) => (
-      <div
-        key={index}
-        className="relative h-[179px] w-[190px] shrink-0"
-        style={{ zIndex: 1 }}
-      >
-        {/* Motion wrapper - scales and rotates the entire card */}
-        <motion.div
-          className="relative h-full w-full rounded-3xl shadow-xl origin-bottom"
-          whileHover={{
-            scaleX: 1.095,
-            scaleY: 1.095,
-            rotateZ: -2,
-            zIndex: 10,
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 350,
-            damping: 20,
-          }}
-          style={{
-            transformOrigin: 'bottom center',
-          }}
-        >
-          {/* Base grayscale image */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="220px"
-              className="object-cover"
-              style={{
-                filter: 'grayscale(100%)',
-              }}
-            />
-          </div>
-          
-          {/* Color overlay that fades in on hover */}
-          <motion.div
-            className="absolute inset-0 rounded-3xl overflow-hidden"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+        <div className="relative w-full overflow-hidden pt-[47px] pb-4 max-w-[628px]">
+          <div 
+            className="flex gap-[21px] transition-transform duration-500 ease-out px-2"
+            style={{ transform: `translateX(-${currentIndex * (190 + 21)}px)` }}
           >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="220px"
-              className="object-cover"
-            />
-          </motion.div>
-        </motion.div>
-      </div>
-    ))}
-  </div>
-</div>
+            {images.map((image, index) => (
+              <div
+                key={index}
+                className="relative h-[179px] w-[190px] shrink-0"
+              >
+                {/* Motion wrapper - scales and rotates from bottom right */}
+                <motion.div
+                  className="relative h-full w-full rounded-3xl"
+                  whileHover={{
+                    scale: 1.095,
+                    rotateZ: -2,
+                    zIndex: 50,
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 350,
+                    damping: 20,
+                  }}
+                  style={{
+                    transformOrigin: 'bottom left',
+                  }}
+                >
+                  {/* Base grayscale image */}
+                  <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="220px"
+                      className="object-cover"
+                      style={{
+                        filter: 'grayscale(100%)',
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Color overlay that fades in on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="220px"
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
