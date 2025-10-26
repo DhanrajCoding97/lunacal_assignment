@@ -4,6 +4,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+
+  --font-family-poppins: var(--font-poppins);
+  --font-family-jakarta: var(--font-plus-jakarta-sans);
+  
+  /* You can also set one as default */
+  --font-family-sans: var(--font-poppins);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -119,15 +126,33 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-linear-to-b from-[#888989] to-[#4A4E54] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)];
 }
 
+  ::-webkit-scrollbar-thumb:hover {
+    @apply from-[#969696] to-[#5A5E64];
+  }
 
-/* MacBook Pro 16" - 160 */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}
 
-/* position: relative;
-width: 1728px;
-height: 895px;
+@media  screen and (min-width: 1024px) and (max-width: 1135px)  {
+  .width-adjust{
+    width: 100%;
+    justify-content: space-between;
+  }
+} 
 
-background: linear-gradient(180deg, #373E44 -100%, #191B1F 100%);
-box-shadow: 10px 10px 40px 10px rgba(0, 0, 0, 0.5);
-border-radius: 28px; */
+
